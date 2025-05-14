@@ -1,0 +1,5 @@
+git init
+git remote add origin https://github.com/oscarrecto/portal_dia.git
+git add index.html
+git commit -m "Página Portal_dia"
+git push -u origin main
