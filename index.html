@@ -2,17 +2,37 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Acción NFC</title>
+  <title>Portal Agua</title>
+  <meta http-equiv="Cache-Control" content="no-store">
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 2rem; }
-    .ok { color: green; font-size: 10.2rem; }
+      body   {font-family:sans-serif;text-align:center;padding:3rem}
+      button {font-size:2rem;padding:1rem 2rem;border:none;border-radius:8px;cursor:pointer}
+      #ok    {display:none;font-size:2.5rem;color:green;margin-top:2rem}
   </style>
 </head>
 <body>
-  <p class="ok">💡 LUZ ENCENDIDA.</p>
+  <h1>PORTAL</h1>
+
+  <button id="abrir">💡 ENCIENDE LA LUZ</button>
+  <p id="ok">✅ Luz Encendida.</p>
+
   <script>
-    fetch('https://pa4w8iolxvumelidtvsy5ksi3pcsburc.ui.nabu.casa/api/webhook/Cdelshorts20dia')
-      .catch(()=>{ /* ignorar errores */ });
+    const URL = 'https://pa4w8iolxvumelidtvsy5ksi3pcsburc.ui.nabu.casa/api/webhook/Cdelshorts20_dia';
+
+    document.getElementById('abrir').addEventListener('click', () => {
+      const btn = document.getElementById('abrir');
+
+      /* 1 – desactivar y ocultar totalmente */
+      btn.disabled = true;
+      btn.style.display = 'none';       // ← ahora desaparece por completo
+      /* también serviría: btn.remove(); */
+
+      /* 2 – llamar al webhook */
+      fetch(URL).finally(() => {
+        document.getElementById('ok').style.display = 'block';
+        setTimeout(() => location.replace('about:blank'), 5000);
+      });
+    });
   </script>
 </body>
 </html>
